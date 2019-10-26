@@ -196,7 +196,7 @@ func TestIsLowerFirstAll(t *testing.T) {
     }
 }
 
-/* Tests chaining multiple validations.
+/* Tests chaining multiple validators.
  */
 func TestInListAndMaxLen(t *testing.T) {
     var haystack = []string{"get", "post", "put"}

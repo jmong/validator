@@ -112,29 +112,26 @@ func TestIsLess(t *testing.T) {
 }
 
 
-/* Tests chaining multiple validations.
+/* Tests chaining multiple validators.
  */
-/*
-func TestInListAndMaxLen(t *testing.T) {
-    var haystack = []string{"get", "post", "put"}
+func TestInListAndIsInRange(t *testing.T) {
+    var haystack = []int{0, 2, 4, 6, 8, 10, 12}
     testcases := []struct{
-        haystack  []string
-        limit     int
-        text      string
+        num       int
+        haystack  []int
+        min, max  int
         expected  bool
     }{
-        {haystack, 10, "get", true},
-        {haystack, 4, "post", true},
-        {haystack, 10, "put", true},
-        {haystack, 2, "get", false},
-        {haystack, 10, "foo", false},
-        {haystack, 10, "GET", false},
-        {haystack, 10, "pOSt", false},
+        {0, haystack, 0, 10, true},
+        {10, haystack, 0, 10, true},
+        {4, haystack, 0, 10, true},
+        {5, haystack, 0, 10, false},
+        {12, haystack, 0, 10, false},
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsInList(test.haystack).IsMaxLen(test.limit).ValidateStr(test.text)
-        t.Logf("IsIn(%v).IsMaxLen(%d).ValidateStr(%s) = %v, expected = %v\n", test.haystack, test.limit, test.text, actual, test.expected)
+        actual := BuildIntChain().IsInList(test.haystack).IsInRange(test.min, test.max).ValidateInt(test.num)
+        t.Logf("IsInList(%v).IsInRange(%d, %d).ValidateInt(%d) = %v, expected = %v\n", test.haystack, test.min, test.max, test.num, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
         } else {
@@ -142,4 +139,3 @@ func TestInListAndMaxLen(t *testing.T) {
         }
     }
 }
-*/ 
