@@ -34,10 +34,10 @@ type stringChain struct {
     Text    string
 }
 
-/* BuildStringChain creates an empty validator chain to check
+/* BuildStrChain creates an empty validator chain to check
  * on string values.
  */
-func BuildStringChain() StringChainer {
+func BuildStrChain() StringChainer {
     return &stringChain{}
 }
 
@@ -142,7 +142,7 @@ func (v *stringChain) IsLowerFirstOnce() StringChainer {
  */
 func (v *stringChain) IsUpperFirstAll() StringChainer {
     f := func() bool {
-        b := BuildStringChain().IsUpperFirstOnce()
+        b := BuildStrChain().IsUpperFirstOnce()
         s := regexp.MustCompile(`\s+`).Split(v.Text, -1)
         for _, word := range s {
             if word != "" && b.ValidateStr(word) == false {
@@ -163,7 +163,7 @@ func (v *stringChain) IsUpperFirstAll() StringChainer {
  */
 func (v *stringChain) IsLowerFirstAll() StringChainer {
     f := func() bool {
-        b := BuildStringChain().IsLowerFirstOnce()
+        b := BuildStrChain().IsLowerFirstOnce()
         s := regexp.MustCompile(`\s+`).Split(v.Text, -1)
         for _, word := range s {
             if word != "" && b.ValidateStr(word) == false {
