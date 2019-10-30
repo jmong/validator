@@ -18,7 +18,7 @@ func TestIsMaxLen(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsMaxLen(test.limit).ValidateStr(test.text)
+        actual := BuildStrChain().IsMaxLen(test.limit).ValidateStr(test.text)
         t.Logf("IsMaxLen(%d).ValidateStr(%s) = %v, expected = %v\n", test.limit, test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -46,7 +46,7 @@ func TestIsInListStr(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsInList(test.haystack).ValidateStr(test.text)
+        actual := BuildStrChain().IsInList(test.haystack).ValidateStr(test.text)
         t.Logf("IsIn(%v).ValidateStr(%s) = %v, expected = %v\n", test.haystack, test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -76,7 +76,7 @@ func TestIsContains(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsContains(test.substr).ValidateStr(test.text)
+        actual := BuildStrChain().IsContains(test.substr).ValidateStr(test.text)
         t.Logf("IsContains(%s).ValidateStr(%s) = %v, expected = %v\n", test.substr, test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -105,7 +105,7 @@ func TestIsUpperFirstOnce(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsUpperFirstOnce().ValidateStr(test.text)
+        actual := BuildStrChain().IsUpperFirstOnce().ValidateStr(test.text)
         t.Logf("IsUpperFirstOnce().ValidateStr(%s) = %v, expected = %v\n", test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -134,7 +134,7 @@ func TestIsLowerFirstOnce(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsLowerFirstOnce().ValidateStr(test.text)
+        actual := BuildStrChain().IsLowerFirstOnce().ValidateStr(test.text)
         t.Logf("IsLowerFirstOnce().ValidateStr(%s) = %v, expected = %v\n", test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -160,7 +160,7 @@ func TestIsUpperFirstAll(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsUpperFirstAll().ValidateStr(test.text)
+        actual := BuildStrChain().IsUpperFirstAll().ValidateStr(test.text)
         t.Logf("IsUpperFirstAll().ValidateStr(%s) = %v, expected = %v\n", test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -186,7 +186,7 @@ func TestIsLowerFirstAll(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsLowerFirstAll().ValidateStr(test.text)
+        actual := BuildStrChain().IsLowerFirstAll().ValidateStr(test.text)
         t.Logf("IsLowerFirstAll().ValidateStr(%s) = %v, expected = %v\n", test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
@@ -216,7 +216,7 @@ func TestInListAndMaxLen(t *testing.T) {
     }
 
     for _, test := range testcases {
-        actual := BuildStringChain().IsInList(test.haystack).IsMaxLen(test.limit).ValidateStr(test.text)
+        actual := BuildStrChain().IsInList(test.haystack).IsMaxLen(test.limit).ValidateStr(test.text)
         t.Logf("IsIn(%v).IsMaxLen(%d).ValidateStr(%s) = %v, expected = %v\n", test.haystack, test.limit, test.text, actual, test.expected)
         if actual != test.expected {
             t.Errorf("[FAIL]")
