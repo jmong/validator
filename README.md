@@ -33,7 +33,7 @@ All conditions must be true in order for the text to be validated.
 
 ```go
 text := "I AM SPARTACUS!"
-isvalidated := validator.BuildStrChain().IsMaxLen(30).IsUpper().IsContains("SPARTACUS!").ValidateStr(text)
+isvalidated := validator.BuildStrChain().IsMaxLen(30).IsUpper().IsContains("AM").ValidateStr(text)
 if isvalidated == true {
     // do something
 }
@@ -42,15 +42,17 @@ if isvalidated == true {
 Here is an example of dynamically building your chain at run-time.
 ```go
 chain := validator.BuildStrChain()
-if optionA == true {
-    chain.IsMaxLen(30)
+if checkMaxLen == true {
+    chain = chain.IsMaxLen(30)
 }
-if optionB == true {
-    chain.IsUpper()
+if checkUpper == true {
+    chain = chain.IsUpper()
 }
 // ... and so on ...
 
-chain.validate(text)
+if chain.ValidateStr(text) == true {
+    // do something
+}
 ```
 
 You can also build the chain and delay triggering the validation till later.
@@ -58,8 +60,8 @@ For example,
 
 ```go
 chains := validator.BuildStrChain().IsMaxLen(5).IsUpper()
-for text := range []string{"ABC", "abc", "aBc", "ABCDEFGH"} {
-    if isvalidated := chains.ValidateStr(text) {
+for _, text := range []string{"ABC", "abc", "aBc", "ABCDEFGH"} {
+    if chains.ValidateStr(text) == true {
         // do something
     }
 }
@@ -68,8 +70,8 @@ for text := range []string{"ABC", "abc", "aBc", "ABCDEFGH"} {
 This gives you flexibility to "save" a chain and pass it around where as needed.
 For example,
 ```go
-choiceA := BuildIntChain().IsInRange(1, 5)
-choiceB := BuildIntChain().IsInRange(6, 10)
+choiceA := validator.BuildIntChain().IsInRange(1, 5)
+choiceB := validator.BuildIntChain().IsInRange(6, 10)
 
 choices := []struct{
     value   int
@@ -86,21 +88,21 @@ You first need to call one of the `Build*Chain()` functions to initialize an emp
 For example, `BuildStrChain()` creates a chain for validating string values.
 ```go
 // Initialize an empty chain for validating string values.
-chain := BuildStrChain()
+chain := validator.BuildStrChain()
 ```
 
 Once a chain is created, you attach any number of validators (applicable for that value type) to it.<br>
-For example, if you want to validate that your string value is all upper-case and has at most 30 characters, you add `IsUpper()` and `IsMaxLen(30)` methods to `BuildStrChain()`.
+For example, if you want to validate that your string value is all upper-case and has at most 30 characters, you add `IsUpper()` and `IsMaxLen()` methods to `BuildStrChain()`.
 ```go
 // Initialize and register these validations to the chain.
-chain := BuildStrChain().IsUpper().IsMaxLen(30)
+chain := validator.BuildStrChain().IsUpper().IsMaxLen(30)
 ```
 
 Finally when you are satisfied that you created the final chain that contains all of the validators you want, you can run the actual validation on your value with one of the `Validate*()` methods.
 
-Similarly there are various `Validate*()` methods to correspond to the value type you are validating. For example, `ValidateStr()` runs the validations on a string value. It returns true if the value passed _all_ validations; otherwise, it returns false.
+Similarly there are various `Validate*()` methods that correspond to the value type you are validating. For example, `ValidateStr()` runs the validations on a string value. It returns true if the value passed _all_ validations; otherwise, it returns false.
 ```go
-isvalidated := BuildStrChain().IsUpper().IsMaxLen(30).ValidateStr("I AM SPARTACUS!")
+isvalidated := validator.BuildStrChain().IsUpper().IsMaxLen(30).ValidateStr("I AM SPARTACUS!")
 if isvalidated == true {
     // do something
 }
