@@ -196,6 +196,33 @@ func TestIsLowerFirstAll(t *testing.T) {
     }
 }
 
+/*
+ */
+func TestIsAlphaNum(t *testing.T) {
+    testcases := []struct{
+        text      string
+        expected  bool
+    }{
+        {"my address", true},
+        {"123 main street", true},
+        {"   234 2nd street", true},
+        {"!@#$$%   what?", true},
+        {"", false},
+        {"   ", false},
+        {" !@#$$%?", false},
+    }
+
+    for _, test := range testcases {
+        actual := BuildStrChain().IsAlphaNum().ValidateStr(test.text)
+        t.Logf("IsAlphaNum().ValidateStr(%s) = %v, expected = %v\n", test.text, actual, test.expected)
+        if actual != test.expected {
+            t.Errorf("[FAIL]")
+        } else {
+            t.Log("[PASS]")
+        }
+    }
+}
+
 /* Tests chaining multiple validators.
  */
 func TestInListAndMaxLen(t *testing.T) {

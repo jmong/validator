@@ -23,6 +23,7 @@ type StringChainer interface {
     IsUpperFirstAll()            StringChainer
     IsLowerFirstAll()            StringChainer
     IsContains(substr string)    StringChainer
+    IsAlphaNum()                 StringChainer
 
     ValidateStr(text string)     bool
 }
@@ -184,6 +185,21 @@ func (v *stringChain) IsLowerFirstAll() StringChainer {
 func (v *stringChain) IsContains(substr string) StringChainer {
     f := func() bool {
         return strings.Contains(v.Text, substr)
+    }
+    v.chains = append(v.chains, f)
+
+    return v
+}
+
+/* IsAlphaNum is a validator that checks that there is
+ * at least one alpha-numeric character.
+ */
+func (v *stringChain) IsAlphaNum() StringChainer {
+    f := func() bool {
+        if strings.IndexAny(v.Text, STR_ALPHA_UPPER + STR_ALPHA_LOWER + STR_NUM) == -1 {
+            return false
+        }
+        return true
     }
     v.chains = append(v.chains, f)
 
